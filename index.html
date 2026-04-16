@@ -8,16 +8,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
 <style>
 :root {
-  /* Zmienione kolory na Light Mode */
-  --ink: #f4f7f9;       /* Jasne tło główne */
-  --ink2: #ffffff;      /* Czysta biel dla kart i sekcji */
-  --sea: #0d4f6e;       
+  --ink: #f4f7f9;
+  --ink2: #ffffff;
+  --sea: #0d4f6e;
   --sea2: #0a8c72;
-  --wave: #059b81;      /* Lekko przyciemniony turkus dla czytelności */
-  --foam: #0d4f6e;      
-  --sun: #e6a000;       /* Lekko przyciemniony żółty dla czytelności */
+  --wave: #059b81;
+  --foam: #0d4f6e;
+  --sun: #e6a000;
   --sun2: #ff8c42;
-  --white: #121820;     /* Ciemny kolor dla głównego tekstu */
+  --white: #121820;
   --glass: rgba(0,0,0,0.02);
   --glass2: rgba(0,0,0,0.05);
   --r: 16px;
@@ -43,6 +42,76 @@ body::before {
   pointer-events: none;
   z-index: 9999;
 }
+
+/* ── COOKIE BANNER ── */
+.cookie-banner {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 10000;
+  background: #ffffff;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  box-shadow: 0 -8px 40px rgba(0,0,0,0.1);
+  padding: 20px 6vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  transform: translateY(0);
+  transition: transform 0.4s ease;
+}
+.cookie-banner.hidden {
+  transform: translateY(110%);
+}
+.cookie-text {
+  flex: 1;
+  min-width: 260px;
+  font-size: 0.85rem;
+  color: rgba(0,0,0,0.65);
+  line-height: 1.6;
+}
+.cookie-text strong {
+  color: var(--white);
+  font-weight: 700;
+}
+.cookie-text a {
+  color: var(--wave);
+  text-decoration: underline;
+  font-weight: 600;
+}
+.cookie-actions {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+.cookie-btn-ok {
+  background: linear-gradient(135deg, var(--wave), #05a88c);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.88rem;
+  padding: 10px 24px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 16px rgba(6,194,161,0.3);
+  font-family: 'DM Sans', sans-serif;
+}
+.cookie-btn-ok:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(6,194,161,0.4); }
+.cookie-btn-info {
+  background: transparent;
+  border: 1px solid rgba(0,0,0,0.15);
+  color: rgba(0,0,0,0.55);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.cookie-btn-info:hover { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.25); }
 
 /* HERO */
 .hero {
@@ -224,12 +293,25 @@ body::before {
 .kat-info { margin-top: 20px; display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
 .kat-info-card {
   background: var(--ink2); border: 1px solid rgba(0,0,0,0.08);
-  border-radius: var(--r); padding: 18px; 
+  border-radius: var(--r); padding: 18px;
   transition: background 0.2s, border-color 0.2s;
 }
 .kat-info-card:hover { background: #fafafa; border-color: rgba(6,194,161,0.4); }
 .kat-info-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--wave); margin-bottom: 6px; font-weight: 600;}
 .kat-info-val { font-size: 1.05rem; font-weight: 600; }
+
+/* LOYAL CUSTOMER BANNER */
+.loyal-banner {
+  margin-top: 20px;
+  display: flex; align-items: center; gap: 14px;
+  background: linear-gradient(135deg, rgba(5,155,129,0.08), rgba(230,160,0,0.06));
+  border: 1px solid rgba(5,155,129,0.25);
+  border-radius: var(--r); padding: 18px 22px;
+}
+.loyal-icon { font-size: 1.8rem; flex-shrink: 0; }
+.loyal-text-top { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 2px; color: var(--wave); font-weight: 700; margin-bottom: 4px; }
+.loyal-text-main { font-size: 0.95rem; font-weight: 600; color: var(--white); }
+.loyal-text-sub { font-size: 0.82rem; color: rgba(0,0,0,0.55); margin-top: 2px; }
 
 /* BOATS */
 .boats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px,1fr)); gap: 20px; }
@@ -295,6 +377,20 @@ body::before {
   margin-top: 12px; display: flex; align-items: flex-start; gap: 10px;
   background: rgba(6,194,161,0.1); border: 1px solid rgba(6,194,161,0.25);
   border-radius: 10px; padding: 11px 14px; font-size: 0.84rem; color: #04826b; font-weight: 500;
+}
+.fuel-notice {
+  margin-top: 10px; display: flex; align-items: flex-start; gap: 10px;
+  background: rgba(13,79,110,0.07); border: 1px solid rgba(13,79,110,0.15);
+  border-radius: 10px; padding: 10px 14px; font-size: 0.82rem; color: #0d4f6e; font-weight: 500;
+}
+
+/* BOATS LOYAL BANNER */
+.boats-loyal {
+  margin-top: 24px;
+  display: flex; align-items: center; gap: 14px;
+  background: linear-gradient(135deg, rgba(5,155,129,0.08), rgba(230,160,0,0.06));
+  border: 1px solid rgba(5,155,129,0.25);
+  border-radius: var(--r); padding: 18px 22px;
 }
 
 /* WHY */
@@ -404,6 +500,7 @@ footer p { font-size: 0.8rem; color: rgba(0,0,0,0.5); font-weight: 500;}
   .contact-left { border-right: none; border-bottom: 1px solid rgba(0,0,0,0.06); padding: 36px 24px; }
   .contact-right { padding: 36px 24px; }
   footer { flex-direction: column; text-align: center; }
+  .cookie-banner { padding: 16px 5vw; }
 }
 @media (max-width: 480px) {
   .boats-grid { grid-template-columns: 1fr; }
@@ -412,6 +509,19 @@ footer p { font-size: 0.8rem; color: rgba(0,0,0,0.5); font-weight: 500;}
 </style>
 </head>
 <body>
+
+<!-- ── COOKIE BANNER ── -->
+<div class="cookie-banner" id="cookieBanner">
+  <div class="cookie-text">
+    <strong>🍪 Informacja o plikach cookie</strong><br>
+    Ta strona może korzystać z podstawowych plików cookie niezbędnych do prawidłowego działania (np. zapamiętanie tej zgody). Nie stosujemy śledzenia, reklam ani zewnętrznych analityk. Korzystając ze strony, akceptujesz tę politykę.
+    <!-- Opcjonalnie: <a href="#">Polityka prywatności</a> -->
+  </div>
+  <div class="cookie-actions">
+    <button class="cookie-btn-info" onclick="document.getElementById('cookieBanner').classList.add('hidden')">Tylko niezbędne</button>
+    <button class="cookie-btn-ok" onclick="acceptCookies()">Rozumiem, OK</button>
+  </div>
+</div>
 
 <section class="hero">
   <div class="hero-bg"></div>
@@ -436,7 +546,7 @@ footer p { font-size: 0.8rem; color: rgba(0,0,0,0.5); font-weight: 500;}
 
 <div class="stats-bar">
   <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">Jednostki</div></div>
-  <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">Osób max</div></div>
+  <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">Osób max</div></div>
   <div class="stat-item"><div class="stat-num">250<span style="font-size:1.4rem">zł</span></div><div class="stat-label">Od / dzień</div></div>
   <div class="stat-item"><div class="stat-num">10</div><div class="stat-label">KM Honda</div></div>
 </div>
@@ -454,7 +564,7 @@ footer p { font-size: 0.8rem; color: rgba(0,0,0,0.5); font-weight: 500;}
       <div class="kat-overlay">
         <div class="kat-badge">⛵ Katamaran ze sterem</div>
         <h3>KATAMARAN</h3>
-        <p>Plaża Miejska, Pisz · Bez patentu</p>
+        <p>Plaża Miejska, Pisz · Bez patentu · 5–6 osób</p>
       </div>
     </div>
     <div class="kat-sub-imgs">
@@ -465,8 +575,20 @@ footer p { font-size: 0.8rem; color: rgba(0,0,0,0.5); font-weight: 500;}
 
   <div class="kat-info">
     <div class="kat-info-card"><div class="kat-info-label">📍 Lokalizacja</div><div class="kat-info-val">Plaża miejska, Pisz</div></div>
+    <div class="kat-info-card"><div class="kat-info-label">👥 Osoby</div><div class="kat-info-val">5–6 osób</div></div>
     <div class="kat-info-card"><div class="kat-info-label">📄 Patent</div><div class="kat-info-val">Nie wymagany</div></div>
-    <div class="kat-info-card"><div class="kat-info-label">✅ Stan</div><div class="kat-info-val">Zwodowany, gotowy</div></div>
+    <div class="kat-info-card"><div class="kat-info-label">💰 Cena</div><div class="kat-info-val">350 zł / dzień</div></div>
+    <div class="kat-info-card"><div class="kat-info-label">⛽ Paliwo</div><div class="kat-info-val">Płaci najemca</div></div>
+    <div class="kat-info-card"><div class="kat-info-label">🔒 Kaucja</div><div class="kat-info-val">300 zł</div></div>
+  </div>
+
+  <div class="loyal-banner">
+    <div class="loyal-icon">🤝</div>
+    <div>
+      <div class="loyal-text-top">Dla stałych klientów</div>
+      <div class="loyal-text-main">Kaucja nie jest pobierana od stałych klientów</div>
+      <div class="loyal-text-sub">Wróciłeś? Dziękujemy za zaufanie – u nas kaucja odpada.</div>
+    </div>
   </div>
 </div>
 
@@ -494,8 +616,12 @@ footer p { font-size: 0.8rem; color: rgba(0,0,0,0.5); font-weight: 500;}
           <div class="bspec"><div class="bspec-l">Stan</div><div class="bspec-v">Idealny</div></div>
         </div>
         <div class="boat-price-row">
-          <div><div class="price-big">300 ZŁ</div><div class="price-small">za dzień + paliwo</div></div>
-          <div class="kaucja-badge">Kaucja 500 zł</div>
+          <div><div class="price-big">300 ZŁ</div><div class="price-small">za dzień + paliwo (koszt najemcy)</div></div>
+          <div class="kaucja-badge">Kaucja 300 zł</div>
+        </div>
+        <div class="fuel-notice">
+          <span style="flex-shrink:0">⛽</span>
+          <span><strong>Paliwo płaci najemca</strong> – łódź wydawana z paliwem startowym, koszty uzupełnienia po stronie klienta.</span>
         </div>
         <div class="patent-notice">
           <span style="flex-shrink:0">⚠️</span>
@@ -525,8 +651,12 @@ footer p { font-size: 0.8rem; color: rgba(0,0,0,0.5); font-weight: 500;}
           <div class="bspec"><div class="bspec-l">Stan</div><div class="bspec-v">Idealny</div></div>
         </div>
         <div class="boat-price-row">
-          <div><div class="price-big">250 ZŁ</div><div class="price-small">za dzień + paliwo</div></div>
-          <div class="kaucja-badge">Kaucja 500 zł</div>
+          <div><div class="price-big">250 ZŁ</div><div class="price-small">za dzień + paliwo (koszt najemcy)</div></div>
+          <div class="kaucja-badge">Kaucja 250 zł</div>
+        </div>
+        <div class="fuel-notice">
+          <span style="flex-shrink:0">⛽</span>
+          <span><strong>Paliwo płaci najemca</strong> – łódź wydawana z paliwem startowym, koszty uzupełnienia po stronie klienta.</span>
         </div>
         <div class="pickup-notice">
           <span>📍</span>
@@ -536,6 +666,15 @@ footer p { font-size: 0.8rem; color: rgba(0,0,0,0.5); font-weight: 500;}
     </div>
 
   </div>
+
+  <div class="boats-loyal loyal-banner">
+    <div class="loyal-icon">🤝</div>
+    <div>
+      <div class="loyal-text-top">Dla stałych klientów</div>
+      <div class="loyal-text-main">Kaucja nie jest pobierana od stałych klientów</div>
+      <div class="loyal-text-sub">Doceniamy lojalność – wróciłeś do nas? Kaucja odpada, witamy ponownie!</div>
+    </div>
+  </div>
 </div>
 
 <div class="why-section">
@@ -544,11 +683,11 @@ footer p { font-size: 0.8rem; color: rgba(0,0,0,0.5); font-weight: 500;}
     <h2 class="section-h">MAZURY BEZ<br>KOMPROMISÓW</h2>
     <div class="why-grid">
       <div class="why-card"><div class="why-icon">🎣</div><h4>Wędkarstwo</h4><p>Idealne na połowy na dzikich mazurskich jeziorach.</p></div>
-      <div class="why-card"><div class="why-icon">👨‍👩‍👧‍👦</div><h4>Rodzinne wycieczki</h4><p>Do 5 osób – dużo miejsca, bezpiecznie i wygodnie.</p></div>
+      <div class="why-card"><div class="why-icon">👨‍👩‍👧‍👦</div><h4>Rodzinne wycieczki</h4><p>Do 6 osób – dużo miejsca, bezpiecznie i wygodnie.</p></div>
       <div class="why-card"><div class="why-icon">⚓</div><h4>Doskonały stan</h4><p>Regularnie serwisowane, niezawodne silniki Honda.</p></div>
       <div class="why-card"><div class="why-icon">🌊</div><h4>Rekreacja</h4><p>Odkryj Pisz i okolice z pokładu własnej łodzi.</p></div>
       <div class="why-card"><div class="why-icon">⚡</div><h4>Od ręki</h4><p>Katamaran zwodowany, łodzie gotowe do odbioru.</p></div>
-      <div class="why-card"><div class="why-icon">🏆</div><h4>Najlepsze ceny</h4><p>Uczciwe stawki, żadnych ukrytych opłat.</p></div>
+      <div class="why-card"><div class="why-icon">🏆</div><h4>Najlepsze ceny</h4><p>Uczciwe stawki, żadnych ukrytych opłat. Stali klienci bez kaucji.</p></div>
     </div>
   </div>
 </div>
@@ -589,6 +728,20 @@ footer p { font-size: 0.8rem; color: rgba(0,0,0,0.5); font-weight: 500;}
   <p>© 2025 Wynajem Łodzi i Katamaranu – Pisz, Mazury</p>
   <p>Tel. 793 144 648</p>
 </footer>
+
+<script>
+  // Cookie banner logic
+  (function() {
+    if (localStorage.getItem('cookiesAccepted')) {
+      document.getElementById('cookieBanner').classList.add('hidden');
+    }
+  })();
+
+  function acceptCookies() {
+    localStorage.setItem('cookiesAccepted', '1');
+    document.getElementById('cookieBanner').classList.add('hidden');
+  }
+</script>
 
 </body>
 </html>
